@@ -1,7 +1,7 @@
 {
-  "name": "vue-kanban-server",
+  "name": "jellikeepr-server",
   "version": "1.0.0",
-  "description": "The server for vue-kanban",
+  "description": "The server for jellikeepr",
   "main": "index.js",
   "scripts": {
     "debug": "node index.js",
