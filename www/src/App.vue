@@ -2,7 +2,7 @@
 
   <v-app id="app" dark>
 
-    <v-navigation-drawer persistent fixed v-model="drawer">
+    <v-navigation-drawer v-if="loggedIn" persistent fixed v-model="drawer">
 
       <v-list>
         <v-list-tile>
@@ -19,7 +19,7 @@
       </v-list>
       <v-divider></v-divider>
 
-      <div v-for="(item, i) in items" :key="i">
+      <div v-for="(item, i) in items" :key="i" class="mb-5">
         <v-list>
           <router-link :to="item.routerLink">
             <v-list-tile value="true">
@@ -52,7 +52,7 @@
       <v-btn flat block @click="logOut" class="teal black--text accent-3 montserrat-thick">Sign out</v-btn>
     </v-navigation-drawer>
     <v-toolbar fixed>
-      <v-toolbar-side-icon @click.stop="drawer = !drawer" light></v-toolbar-side-icon>
+      <v-toolbar-side-icon v-if="loggedIn" @click.stop="drawer = !drawer" light></v-toolbar-side-icon>
       <v-toolbar-title class="montserrat-thick">JelliKeepr</v-toolbar-title>
     </v-toolbar>
     <canvas id="bubble">
@@ -402,5 +402,6 @@
     width: 100%;
     height: 100% !important;
     position: fixed;
+    z-index: 0;
   }
 </style>

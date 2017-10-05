@@ -20,6 +20,7 @@ var store = new vuex.Store({
     user: {},
     vaults: [],
     keeps: [],
+    allKeeps: [],
     activeVault: {},
     error: {},
     registered: false,
@@ -46,6 +47,9 @@ var store = new vuex.Store({
     },
     setKeeps(state, keeps) {
       state.keeps = keeps;
+    },
+    setAllKeeps(state, data){
+      state.allKeeps = data
     },
     setKeepTasks(state, data) {
       vue.set(state.tasks, data.keepId, data.data) // use this any time you are adding a property to an object on the fly (that you care about)
@@ -161,9 +165,22 @@ var store = new vuex.Store({
         })
 
     },
+    getAllKeeps({ commit, dispatch }, id) {
+      api('/keeps') // created this in custom-routes/vault-routes.js under vaultKeeps
+        .then(res => {
+          // console.log(res)
+          commit('setAllKeeps', res.data.data)
+          // keep.keepId = keep._id
+          // dispatch('getKeepTasks', keep)
+        })
+        .catch(err => {
+          commit('handleError', err)
+        })
+
+    },
     addKeep({ commit, dispatch }, keep) {
       console.log(keep)
-      api.post('keeps/', keep)
+      api.post('vaults/' + keep.vaultId + '/keeps/', keep)
         .then(res => {
           console.log("came back with response after adding Keep")
           dispatch('getKeeps', keep.vaultId)
@@ -172,19 +189,19 @@ var store = new vuex.Store({
           commit('handleError', err)
         })
     },
-    deleteKeep({ commit, dispatch }, keepId) {
-      api.delete('keeps/' + keepId)
+    updateKeep({ commit, dispatch }, { keep, vaultId }) {
+      api.put('/keeps/' + keep._id, keep)
         .then(res => {
-          dispatch('getKeeps', res.data.data.vaultId)
+          dispatch('getKeeps', vaultId)
         })
         .catch(err => {
           commit('handleError', err)
         })
     },
-    
-handleError({ commit, dispatch }, err){
-  commit('handleError', err)
-}
+
+    handleError({ commit, dispatch }, err) {
+      commit('handleError', err)
+    }
   }
 
 })
