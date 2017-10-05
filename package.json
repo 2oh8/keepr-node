@@ -2,7 +2,7 @@
     "name": "jellikeepr-server",
     "version": "1.0.0",
     "description": "The server for jellikeepr",
-    "main": "server/index.js",
+    "main": "index.js",
     "scripts": {
         "debug": "node server/index.js",
         "start": "node server/index.js",
