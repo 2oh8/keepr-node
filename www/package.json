@@ -1,5 +1,5 @@
 {
-  "name": "wwwsrc",
+  "name": "afterhrs",
   "version": "1.0.0",
   "description": "A Vue.js project",
   "author": "Matt Young <matthewdyoung@att.net>",
@@ -14,8 +14,8 @@
     "jquery": "^3.2.1",
     "vue": "^2.4.2",
     "vue-router": "^2.7.0",
-    "vuetify": "^0.15.7",
-    "vuex": "^2.4.1"
+    "vuetify": "^0.15.1",
+    "vuex": "^2.4.0"
   },
   "devDependencies": {
     "autoprefixer": "^7.1.2",
