@@ -1,7 +1,7 @@
 <template>
   <div class="vaults">
 
-  <router-link :to="'/vaults/'+vault._id" class="btn-liquid"> 
+  <router-link :to="{name: 'Vault', params: {vaultId: vault._id}}" class="btn-liquid"> 
       <span class="inner montserrat-thick">{{ vault.name }}&nbsp;&nbsp;/<v-btn icon small class="mb-2" @click.prevent="removeVault(vault._id)"><v-icon>delete_forever</v-icon></v-btn></span>
       <canvas :id="vault._id"></canvas>
   </router-link>

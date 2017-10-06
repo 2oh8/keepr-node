@@ -74,12 +74,9 @@
                 keepImg: ''
             }
         },
-        components: {
-
-        },
         mounted() {
+            this.$store.dispatch('getKeeps', this.vaultId)
             this.$store.dispatch('getVault', this.$route.params.vaultId)
-            this.$store.dispatch('getKeeps', this.$route.params.vaultId)
         },
         computed: {
             activeVault() {
@@ -87,6 +84,17 @@
             },
             keeps() {
                 return this.$store.state.keeps
+            },
+            vaultId() {
+                return this.$route.params.vaultId
+            }
+        },
+        watch: {
+            vaultId: {
+                handler() {
+                    this.$store.dispatch('getKeeps', this.vaultId)
+                    this.$store.dispatch('getVault', this.$route.params.vaultId)
+                }
             }
         },
         methods: {
@@ -105,7 +113,7 @@
             },
             deleteKeep(input) {
                 input.vaultId.splice(this.$route.params.vaultId, 1)
-                this.$store.dispatch('updateKeep', {keep: input, vaultId: this.$route.params.vaultId})
+                this.$store.dispatch('updateKeep', { keep: input, vaultId: this.$route.params.vaultId })
             }
         },
     }
